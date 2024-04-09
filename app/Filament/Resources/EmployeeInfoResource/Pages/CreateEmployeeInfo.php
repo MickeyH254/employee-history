@@ -23,7 +23,5 @@ class CreateEmployeeInfo extends CreateRecord
                 ->send();
             $this->halt();
         }
-        dd($employeeInfo);
-        dd($this->data);
     }
 }

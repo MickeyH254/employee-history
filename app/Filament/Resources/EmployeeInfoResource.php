@@ -133,12 +133,12 @@ class EmployeeInfoResource extends Resource implements HasShieldPermissions
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('user')
+                Tables\Filters\SelectFilter::make('user_id')
                     ->searchable()
                     ->preload()
                     ->label('Staff Number')
                     ->visible(Gate::allows('filter_employee::info'))
-                    ->relationship('user', 'staff_no'),
+                    ->options(User::query()->whereNotNull('staff_no')->pluck('staff_no', 'id')),
             ], layout: FiltersLayout::AboveContent)
             ->actions([
                 Tables\Actions\EditAction::make(),

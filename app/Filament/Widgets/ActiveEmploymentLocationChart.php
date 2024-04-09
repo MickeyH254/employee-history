@@ -21,6 +21,7 @@ class ActiveEmploymentLocationChart extends ChartWidget
     {
         $this->locations = Location::all()->pluck('location')->toArray();
         $this->data = EmployeeInfo::with('location')
+            ->whereNull('end_date')
             ->select('location_id', DB::raw('count(*) as employee_count'))
             ->groupBy('location_id')
             ->get()->pluck('employee_count')->toArray();
